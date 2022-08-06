@@ -4,7 +4,7 @@ const filterItems = (category) => {
     if (item.children[1].children[1].innerText !== category) {
       item.style = "display: none;";
     } else {
-      item.style = "display: block;";
+      item.style = "display: flex;";
     }
   }
 };
