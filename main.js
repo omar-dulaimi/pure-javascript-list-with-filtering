@@ -1,28 +1,14 @@
-let items = [];
-let filter = "";
+import { getItems } from "./api.js";
 
-const getItems = async () => {
-  try {
-    const response = await fetch(
-      "http://www.filltext.com/?rows=10&fname=omar&lname=dulaimi&category=[%22cats%22,%20%22code%22,%20%22people%22]"
-    );
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error("An error occurred!", error?.message);
-    return [];
-  }
-};
+let items = [];
 
 const filterItems = (category) => {
-  console.log(category);
-
   const items = document.getElementsByClassName("list-item");
   for (const item of items) {
     if (item.children[1].children[1].innerText !== category) {
-        item.style = "display: none;"
+      item.style = "display: none;";
     } else {
-        item.style = "display: block;"
+      item.style = "display: block;";
     }
   }
 };
