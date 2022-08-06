@@ -69,7 +69,7 @@ const displayCategories = () => {
     const categoryItem = document.createElement("div");
     categoryItem.innerText = category;
     categoryItem.classList = "category";
-    categoryItem.style = "margin-right: 5px;";
+    categoryItem.style = "margin-right: 5px; cursor: pointer;";
     categoryItem.onclick = () => filterItems(category);
     categoriesWrapper.append(categoryItem);
   }
