@@ -1,3 +1,6 @@
+let items = [];
+let filter = "";
+
 const getItems = async () => {
   try {
     const response = await fetch(
@@ -11,22 +14,20 @@ const getItems = async () => {
   }
 };
 
-const exec = async () => {
-  const items = await getItems();
-  const categories = [...new Set(items.map((item) => item.category))];
+const filterItems = (category) => {
+  console.log(category);
 
-  const categoriesWrapper = document.createElement("div");
-  categoriesWrapper.classList = "category-wrapper";
-  document.getElementById("wrapper").append(categoriesWrapper);
-
-  for (const category of categories) {
-    const categoryItem = document.createElement("div");
-    categoryItem.innerText = category;
-    categoryItem.classList = "category";
-    categoryItem.style = "margin-right: 5px;";
-    categoriesWrapper.append(categoryItem);
+  const items = document.getElementsByClassName("list-item");
+  for (const item of items) {
+    if (item.children[1].children[1].innerText !== category) {
+        item.style = "display: none;"
+    } else {
+        item.style = "display: block;"
+    }
   }
+};
 
+const displayRows = () => {
   for (const item of items) {
     const listItem = document.createElement("div");
     listItem.classList = "list-item";
@@ -56,6 +57,29 @@ const exec = async () => {
     listItem.append(nameWrapper);
     document.getElementById("list").append(listItem);
   }
+};
+
+const displayCategories = () => {
+  const categories = [...new Set(items.map((item) => item.category))];
+  const categoriesWrapper = document.createElement("div");
+  categoriesWrapper.classList = "category-wrapper";
+  document.getElementById("wrapper").append(categoriesWrapper);
+
+  for (const category of categories) {
+    const categoryItem = document.createElement("div");
+    categoryItem.innerText = category;
+    categoryItem.classList = "category";
+    categoryItem.style = "margin-right: 5px;";
+    categoryItem.onclick = () => filterItems(category);
+    categoriesWrapper.append(categoryItem);
+  }
+};
+
+const exec = async () => {
+  items = await getItems();
+
+  displayCategories();
+  displayRows();
 };
 
 exec();
