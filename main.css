@@ -1,4 +1,4 @@
-.wrapper {
+#wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -54,4 +54,10 @@
 
 .name {
   margin-top: 8px;
+}
+
+
+.category-wrapper {
+  display: flex;
+  flex-direction: row;
 }
